@@ -14,6 +14,20 @@ public class RegexCompiler {
         while (true) {
             // System.out.println("Enter your regex...");
             // String regex = console.nextLine();
+
+            /*==============================================================
+             * Assignment RegEx
+             * ===========================================================
+             * 
+             * Email Regex = ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+             * Fax Regex = ^(\+?\d{1,}(\s?|\-?)\d*(\s?|\-?)\(?\d{2,}\)?(\s?|\-?)\d{3,}\s?\d{3,})$
+             * IP Regex = \b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b
+             * Date Pattern RegEx = ^(0[1-9]|[12][0-9]|3[01])[-/.](0[1-9]|1[012])[-/.](19|20)\d\d$
+             * <title></title> RegEx = ^(<title>).*(</title>)$
+             * HTML Tags (any tag) RegEx = <.+?>
+             * 
+             * ==============================================================
+             */
             String regex = "[0-2][0-4]:[0-5][0-9]:[0-5][0-9]";
             Pattern pattern = Pattern.compile(regex);
             System.out.println("Enter your input text...");
