@@ -37,10 +37,12 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+
+        // initiating the UI interface
         homeWindow = primaryStage;
-        homeWindow.setMinWidth(391);
-        homeWindow.setMinHeight(399);
-        homeWindow.setResizable(false);
+        homeWindow.setMinWidth(500);
+        homeWindow.setMinHeight(500);
+        homeWindow.setResizable(true);
         
         
         homeWindow.setOnCloseRequest(e ->{
@@ -135,7 +137,7 @@ public class Main extends Application {
         homeLayout.setVgap(10);
         homeLayout.getChildren().add(modelBox);
         
-        buttonsBox = new HBox(queryButton, graphButton, clearButton);
+        buttonsBox = new HBox(queryButton, graphButton);
         buttonsBox.setPadding(new Insets(8, 8, 8, 8));
         buttonsBox.setSpacing(20);
         
@@ -169,7 +171,7 @@ public class Main extends Application {
         
         
         Scene scene = new Scene(homeLayout);
-        scene.getStylesheets().add(Main.class.getResource("Light.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
         homeWindow.setTitle("Queueing Models");
         homeWindow.setScene(scene);
         homeWindow.show();

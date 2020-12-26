@@ -78,11 +78,13 @@ public class DeterministicModel{
             if(checkNandT()){
                 if(t != -1){
                     long nt = m.calcNt(t);
+                    // case 1
                     if(initialNumberM == 0){
                         if(nt == -1){
                             answerN_of_t.setText(String.format("Number of customers at time %.3f will be either %d or %d customer(s).", t, (capacityK_minus_1), (capacityK_minus_1 - 1)));
                         }else
                             answerN_of_t.setText(String.format("Number of customers at time %.3f will be %d", t, nt));
+                    // case 2
                     }else{
                         if(nt == -1)
                             answerN_of_t.setText(String.format("Number of customers at time %.3f will be either 0 or 1 customer.", t));
@@ -133,7 +135,7 @@ public class DeterministicModel{
         errorAlert.setHeaderText(null);
         
         Scene scene = new Scene(layout);
-        scene.getStylesheets().add(DeterministicModel.class.getResource("Light.css").toExternalForm());
+        scene.getStylesheets().add(DeterministicModel.class.getResource("style.css").toExternalForm());
         window.setScene(scene);
         window.showAndWait();
     }

@@ -38,20 +38,22 @@ public class ModelDD1K1 {
                 answer = (int) (EPS + Math.floor(t / arrival_time) - Math.floor((t / service_time) - (arrival_time / service_time)));
             }else if(isLambdaMultipleOfMu(lambda, mu)){
                 answer = k_minus_1;
-            }else 
+            }else {
                 answer = -1;
+            }
         }else{
             if(lambda == mu)
                 answer = initialNumberM;
             else if(t < ti)
                 answer = initialNumberM + (int)(t / arrival_time + EPS) - (int)(t / service_time + EPS);
-            else 
+            else
                 answer = -1;
         }
         return answer;
     }
 
-    private void calcTi() {        
+    private void calcTi() {
+         // case 1
         if(initialNumberM == 0){
             int answer = (int)(EPS + (k * arrival_time * service_time - arrival_time * arrival_time)
                                        /(service_time - arrival_time));
@@ -85,7 +87,7 @@ public class ModelDD1K1 {
     public double calcWq(int n) {
         double answer = 0;
         int k = k_minus_1 + 1;
-        
+        // case 1
         if(initialNumberM == 0){
             if(n == 0)
                 answer = 0;
@@ -101,6 +103,7 @@ public class ModelDD1K1 {
                     answer = -1;
                 }
             }
+            // case 2
         }else{
             if(lambda == mu)
                 answer = ((initialNumberM - 1) * (1 / mu) + EPS);

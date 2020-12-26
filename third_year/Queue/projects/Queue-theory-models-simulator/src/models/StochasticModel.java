@@ -39,7 +39,7 @@ public class StochasticModel {
         
         
         Scene scene = new Scene(layout);
-        scene.getStylesheets().add(StochasticModel.class.getResource("Light.css").toExternalForm());
+        scene.getStylesheets().add(StochasticModel.class.getResource("style.css").toExternalForm());
         
         setFontSize(20);
         window.setTitle(title);
