@@ -38,15 +38,15 @@ def solveTheEquation(zbMatrix, bMatrix, ebMatrix, ibMatrix):
 
     # Current In Each Link = solution of the equation
     Il = np.linalg.solve(leftSideOfEquation, rightSideOfEquation)
-    print("\n Current In Each Link (loop current) Il: \n", Il)
+    print("\n Current On Each Link (loop current) Il: \n", Il)
 
     # current in each branch = B transpose * IL
     IbInEachBranch = np.matmul(bMatrix.transpose(), Il)
-    print("\n Current In Each Branch Ib: \n", IbInEachBranch)
+    print("\n Current On Each Branch Ib: \n", IbInEachBranch)
 
     # Voltage in each branch = (Zb * (IbInEachBranch + IbMatrix) ) - ebMatrix
     VbInEachBranch = np.matmul(zbMatrix, (IbInEachBranch + ibMatrix)) - ebMatrix
-    print("\n Voltage In Each Branch Vb: \n", VbInEachBranch)
+    print("\n Voltage On Each Branch Vb: \n", VbInEachBranch)
 
 def getEbMatrix(branchesNumber):
     print("Enter the elements of VOLTAGE SOURCE matrix Eb ORDERED in a single line (separated by space): ")
