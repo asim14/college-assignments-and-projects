@@ -3,29 +3,73 @@ import numpy as np
 def main():
     while True: 
         print("===========================================================")
-        inputMatrix, branches = getInputMatrix()
+        inputMatrix, nodesNumber, branchesNumber = getInputMatrix()
         if validateInputMatrix(inputMatrix): 
             print("The matrix Elements values are not accepted\n")
             continue
 
-        cMatrix = calcCMatrix(inputMatrix, branches)
-        print("\n\n C Matrix: \n", cMatrix)
+        cMatrix = calcCMatrix(inputMatrix, nodesNumber)
+        print("\n C Matrix: \n", cMatrix)
+        bMatrix = calcBMatrix(inputMatrix, nodesNumber)
+        print("\n B Matrix: \n", bMatrix)
 
-        bMatrix = calcBMatrix(inputMatrix, branches)
-        print("\n\n B Matrix: \n", bMatrix)
+        ZbMatrix = getZbMatrix(branchesNumber)
+        EbMatrix = getEbMatrix(branchesNumber)
+        IbMatrix = getIbMatrix(branchesNumber)
+        solveTheEquation(ZbMatrix, bMatrix, EbMatrix, IbMatrix)
 
+def solveTheEquation(zbMatrix, bMatrix, ebMatrix, ibMatrix):
+    # Zb * B transpose
+    zbTimesBTranspose = np.matmul(zbMatrix, bMatrix.transpose())
+    # B * Zb * B transpose (Left side of equation)
+    leftSideOfEquation = np.matmul(bMatrix, zbTimesBTranspose)
+# =============================================================================
+    # B * Eb
+    bTimesEb = np.matmul(bMatrix, ebMatrix)
+
+    # Ib * Zb
+    ibTimesZb = np.matmul(zbMatrix, ibMatrix)
+
+    # B * Ib * Zb
+    bTimesIbTimesZb = np.matmul(bMatrix, ibTimesZb)
+
+    # B * Eb - B * Zb * Ib (Right side of equation)
+    rightSideOfEquation = bTimesEb - bTimesIbTimesZb
+
+    # Current In Each Link = solution of the equation
+    Il = np.linalg.solve(leftSideOfEquation, rightSideOfEquation)
+    print("\n Current In Each Link (loop current) Il: \n", Il)
+
+    # current in each branch = B transpose * IL
+    IbInEachBranch = np.matmul(bMatrix.transpose(), Il)
+    print("\n Current In Each Branch Ib: \n", IbInEachBranch)
+
+    # Voltage in each branch = (Zb * (IbInEachBranch + IbMatrix) ) - ebMatrix
+    VbInEachBranch = np.matmul(zbMatrix, (IbInEachBranch + ibMatrix)) - ebMatrix
+    print("\n Voltage In Each Branch Vb: \n", VbInEachBranch)
+
+def getEbMatrix(branchesNumber):
+    print("Enter the elements of VOLTAGE SOURCE matrix Eb ORDERED in a single line (separated by space): ")
+    entries = list(map(int, input().split()))
+    return np.array(entries).reshape(branchesNumber, 1)
+
+def getIbMatrix(branchesNumber):
+    print("Enter the elements of CURRENT SOURCE matrix Ib ORDERED in a single line (separated by space): ")
+    entries = list(map(int, input().split()))
+    return np.array(entries).reshape(branchesNumber, 1)
+
+def getZbMatrix(branchesNumber):
+    print("Enter the elements of resistance matrix Zb ORDERED in a single line (separated by space): ")
+    entries = list(map(int, input().split()))
+    return np.array(entries).reshape(branchesNumber, branchesNumber)
 
 def getInputMatrix():
-    R = int(input("Enter the number of rows: "))
-    C = int(input("Enter the number of columns: "))
-    B = int(input("Enter the number of branches: "))
+    nodesNumber = int(input("Enter the number of nodes: "))
+    branchesNumber = int(input("Enter the number of branches: "))
 
     print("Enter the elements of A matrix ORDERED in a single line (separated by space): ")
-
-    # User input of entries in a
-    # single line separated by space
     entries = list(map(int, input().split()))
-    return np.array(entries).reshape(R, C), B
+    return np.array(entries).reshape(nodesNumber, branchesNumber), nodesNumber, branchesNumber
 
 def validateInputMatrix(inputMatrix):
     column_sums = inputMatrix.sum(axis=0)
@@ -54,7 +98,7 @@ def completeAMatrix(inputMatrix):
 def getATree(AMatrix, branches, isRowAdded):
     if isRowAdded:
         AMatrix = AMatrix[:-1]
-    return AMatrix[:, 0:branches]
+    return AMatrix[:, :branches]
 
 def getInverseOfATree(ATree):
     return np.linalg.inv(ATree)

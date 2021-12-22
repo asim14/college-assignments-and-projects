@@ -1,7 +1,0 @@
-Problem 1:
-
-A matrix Rows = 3
-A matrix Columns = 3
-Graph Branches = 3
-A Matrix Values =  -1 1 1 1 0 0 0 -1 0 0 1 0 0 -1 -1
-=========================================================
