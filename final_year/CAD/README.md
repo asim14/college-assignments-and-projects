@@ -27,4 +27,4 @@ a simple console project to calculate the Voltage and Current of a simple circui
   - a matrix of the values of the voltages on each Branch
 
 ## Example
-you can find a examples in the `problems.txt` file 
+you can find some examples in the `problems.txt` file 
