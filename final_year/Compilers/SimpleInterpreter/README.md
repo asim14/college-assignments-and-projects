@@ -17,4 +17,4 @@ this assignment to demonstrate my understanding of first 3 phases of Compilers:
 you can find some examples in the `problems.txt` file 
 
 ## Screenshots
-<img src="https://github.com/ahmadateya/learning-notes/blob/main/images/Screenshot%20from%202021-12-04%2010-33-29.png" width="600" height="250">
+<img src="https://github.com/ahmadateya/college-assignments-and-projects/blob/main/final_year/Compilers/SimpleInterpreter/screenshot.png" width="700" height="400">
