@@ -15,3 +15,6 @@ this assignment to demonstrate my understanding of first 3 phases of Compilers:
 
 ## Examples
 you can find some examples in the `problems.txt` file 
+
+Screenshot of the program
+
