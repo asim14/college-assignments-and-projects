@@ -30,5 +30,5 @@ a simple console project to calculate the Voltage and Current of a simple circui
 you can find some examples in the `problems.txt` file 
 
 ## Screenshots
-<img src="https://github.com/ahmadateya/learning-notes/blob/main/images/Screenshot%20from%202021-12-04%2010-33-29.png" width="600" height="250">
+<img src="https://github.com/ahmadateya/college-assignments-and-projects/blob/main/final_year/CAD/screenshot.png" width="700" height="400">
 
