@@ -43,7 +43,7 @@ class Interpreter implements Expr.Visitor<Object> {
         
         Object right = evaluate(expr.right);
 
-        return !(boolean)right;
+        return -(double)right;
     }
 
     @Override
